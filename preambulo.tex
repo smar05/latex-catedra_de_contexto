@@ -1,0 +1,243 @@
+\usepackage[utf8]{inputenc}
+
+\usepackage{graphicx}
+\usepackage{subcaption}
+
+%\usepackage{subfig}         % Multiples imagenes
+\usepackage{vmargin}		% Paquete para margenes y formato de página
+\setpapersize{A4}
+\setmargins	{2.5 cm}     	% margen izquierdo
+{0.5 cm}                 	% margen superior
+{16.5cm}               		% anchura del texto
+{24cm}             		    % altura del texto
+{20pt}                		% altura de los encabezados
+{1.2cm}               		% espacio entre el texto y los encabezados
+{0pt}                		% altura del pie de página
+{2cm}                 		% espacio entre el texto y el pie de página
+
+% Preambulo
+\usepackage{tikz, tkz-euclide} % hacer gráficos
+\usepackage[american, european]{circuitikz} % hacer circuitos
+\usepackage{siunitx} % Unidades SI \SI{}{} and \si{} commands for typesetting SI units
+
+\usepackage[spanish, es-tabla, es-noshorthands]{babel}
+\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{tikz, tkz-euclide}
+\usetikzlibrary{shapes.geometric, shapes.symbols, arrows, shadows}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{circuitikz}
+\usepackage{adjustbox}
+\usepackage[many]{tcolorbox}
+    \tcbuselibrary{theorems}
+
+\usepackage{hyperref}
+\usepackage[acronym]{glossaries}
+\makeglossaries
+%\include{glosario}
+\include{acronimos}
+\usepackage{biblatex}
+\addbibresource{ref.bib}
+%\tikzset{>=latex}
+
+\usepackage{pgfplots}
+\usetikzlibrary{pgfplots.smithchart}
+\usepgfplotslibrary{colorbrewer}
+\pgfplotsset{cycle list/Set1-4}
+\usepgfplotslibrary{polar}
+\pgfplotsset{compat=newest}
+\usepgfplotslibrary{smithchart}
+\usepackage{siunitx} 
+\usepackage{tikz, tkz-base, tkz-fct, pgfplots}
+\usepackage{colortbl}
+\usepackage{steinmetz}
+\usetikzlibrary{bending}
+\pgfplotsset{compat=1.13}
+\definecolor{micolor}{rgb}{0.9,0.5,0.9}
+\ctikzset{current  arrow color/.initial=red}
+
+\usepackage{xparse}
+\DeclareDocumentCommand{\newdualentry}{ O{} O{} m m m m } {
+  \newglossaryentry{gls-#3}{name={#5},text={#5\glsadd{#3}},
+    description={#6},#1
+  }
+  \makeglossaries
+  \newacronym[see={[Glossary:]{gls-#3}},#2]{#3}{#4}{#5\glsadd{gls-#3}}
+}
+
+
+\usepackage{amsmath, amsthm, amsfonts}
+\def\RR{\mathbb{R}}
+\def\ZZ{\mathbb{Z}}
+
+% De la misma forma se pueden definir comandos con argumentos. Por
+% ejemplo, aquí definimos un comando para escribir el valor absoluto
+% de algo más fácilmente.
+%--------------------------------------------------------------------------
+
+% declaracion de unidades no SI
+\DeclareSIUnit{\pf}{pF}
+\DeclareSIUnit{\pH}{pH}
+\DeclareSIUnit{\nh}{nH}
+\DeclareSIUnit{\nf}{nF}
+\DeclareSIUnit{\uf}{{\micro}F} 
+\DeclareSIUnit{\uh}{{\micro}H} 
+\DeclareSIUnit{\ms}{mS}
+\DeclareSIUnit{\second}{s}
+\DeclareSIUnit{\MHz}{MHz}
+\DeclareSIUnit{\dB}{dB}
+\graphicspath{ {imagenes/} }
+
+%-----------------------------------------------------------------------------
+%               Entorno Para ejemplos 
+%-----------------------------------------------------------------------------
+
+ 
+ %                  Entorno para ecuaciones de ejemplos
+ %--------------------------------------------------------------------------
+\usepackage{environ}               % Define entornos (ecuaciones de ejemplos)
+\NewEnviron{meq}{%
+    \begin{equation}
+    \scalebox{1}{$\BODY$}           % Se utiliza el paquete "graphix"
+    \end{equation}
+    }
+%------------------------------------------------------------------------------
+%                   Entorno de para los diagramas de flujos, como  "Mason"   
+%------------------------------------------------------------------------------
+\usetikzlibrary{decorations.markings,arrows.meta}
+\tikzset
+  {midarrow/.style={decoration={markings,mark=at position 0.5 with
+     {\arrow[xshift=2pt, purple]{Latex[length=6pt,#1]}}},postaction={decorate}}
+  }
+  
+  \newcommand{\txb}[1]{\small\sffamily #1}
+\def\RR{\mathbb{R}}
+\def\ZZ{\mathbb{Z}}
+
+%------------------------------------------------------------------------
+%           Macros para las redes red1 para grandes (pocos componentes 0-12)
+%           pequeños, red2 medianas (varios componentes 0-16)
+%           y red3 grandes pequeñas (muchos componentes 0-20)
+%-------------------------------------------------------------------------
+\newenvironment{red0}[1][0.8]
+    {
+   \begin{adjustbox}{width=0.4\textwidth}
+    \begin{circuitikz}[scale=#1]
+    }
+    { 
+    \end{circuitikz}
+   \end{adjustbox} 
+    }
+
+\newenvironment{red1}[1][0.7]
+    {  \begin{subfigure}[b]{ 0.45\textwidth}
+   \begin{adjustbox}{width=0.6\textwidth}
+    \begin{circuitikz}[scale=#1]
+    }
+    { 
+    \end{circuitikz}
+   \end{adjustbox} 
+     \caption{}
+    \end{subfigure} 
+    }
+    
+\newenvironment{red2}[1][0.7]{
+        \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{adjustbox}{width=0.8\textwidth}
+    \begin{circuitikz}[scale=#1]
+    }
+    { 
+    \end{circuitikz}
+    \end{adjustbox} 
+    \caption{}
+    \end{subfigure} 
+    }
+\newenvironment{red3}[1][0.7]
+    {\begin{subfigure}[b]{0.45\textwidth}
+    \begin{adjustbox}{width=1\textwidth}
+    \begin{circuitikz}[scale=#1]
+    }
+    { 
+    \end{circuitikz}
+    \end{adjustbox} 
+     \caption{}
+    \end{subfigure} 
+    }
+
+%------------------------------------------------------------------------
+%           Macros para las redes re1 pequeños, rd2 medianos y red3 grandres
+%-------------------------------------------------------------------------
+\newenvironment{red1a}[1][0.7]{
+        
+        \begin{adjustbox}{scale=0.8}
+        \begin{circuitikz}[scale=#1]
+    }
+    { 
+        \end{circuitikz}
+        \end{adjustbox} 
+    %\end{center}
+    }
+    
+    \newenvironment{reda}[1][1]
+    {\begin{subfigure}[b]{0.4\textwidth}
+   \begin{adjustbox}{width=1\textwidth}
+    \begin{circuitikz}[x=#1cm,y=#1cm]
+    \tikzset{font={\fontsize{15pt}{12pt}\selectfont}}
+    %\ctikzset{bipoles/length=25mm}
+    \centering
+    }
+    { 
+    \end{circuitikz}
+    \end{adjustbox}
+    \end{subfigure} 
+    }
+    
+%\ctikzset{bipoles/ammeter/text rotate/.initial=0, rotation/.style={bipoles/ammeter/text rotate=#1},
+%}
+\newenvironment{redb}[1][0.8]
+    {\begin{subfigure}[b]{0.45\textwidth}
+   \begin{adjustbox}{width=1\textwidth}
+    \begin{circuitikz}[x=0.8cm,y=#1cm]
+    \tikzset{font={\fontsize{15pt}{15pt}\selectfont}}
+    \ctikzset{bipoles/length=20mm}
+    }
+    { 
+    \end{circuitikz}
+    \end{adjustbox} 
+     \caption{}
+    \end{subfigure} 
+    }
+%------------------------------------------------------------------------
+%          Entorno para los ejemplos
+%-------------------------------------------------------------------------
+%\usepackage{draftwatermark}
+%\SetWatermarkText{\textsc{jpoveda@}} %
+% \newtcbtheorem[auto counter, number within = section]{ejemplo}{Ejemplo}%
+% 	{   enhanced,
+% 	arc=2mm,
+% 	interior style={},
+% 	attach boxed title to top center= {yshift=-\tcboxedtitleheight/4},
+% 	borderline={0.5mm}{0mm}{gray!20!white,dashed},
+% 	fonttitle=\bfseries,
+% 	fontupper=\itshape,
+% 	colbacktitle=white,coltitle=black,
+% 	boxed title style={size=normal,colframe=purple!50,boxrule=1pt}
+% 	}
+% {th}
+
+\newtcbtheorem[auto counter, number within = section]{ejemplo}{Ejemplo CA}%
+	{   enhanced,
+	arc=2mm,
+	interior style={},
+	attach boxed title to top center= {yshift=-\tcboxedtitleheight/4},
+	borderline={0.5mm}{0mm}{gray!20!white,dashed},
+	fonttitle=\bfseries,
+	fontupper=\itshape,
+	colbacktitle=white,coltitle=black,
+	boxed title style={size=normal,colframe=purple!50,boxrule=1pt}
+	}
+{th}
